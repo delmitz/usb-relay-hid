@@ -109,6 +109,8 @@ int usbhidEnumDevices(int vendor, int product,
         return USBHID_ERR_IO_HID;
     
     CFSetRef device_set = IOHIDManagerCopyDevices(mgr);
+    if (!device_set)
+        return USBHID_ERR_NOTFOUND;
     CFIndex num_devices = CFSetGetCount(device_set);
     if (0 == num_devices)
         return USBHID_ERR_NOTFOUND;
